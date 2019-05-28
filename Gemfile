@@ -9,3 +9,7 @@ gem 'rake'
 gem 'byebug'
 gem 'sinatra-activerecord'
 gem 'rufus-scheduler'
+group :test do
+  gem 'rack-test'
+  gem 'rspec'
+end
