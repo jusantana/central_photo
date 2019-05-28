@@ -2,7 +2,7 @@
 require_relative '../spec_helper'
 
 
-RSpec.describe 'Sinatra App' do
+RSpec.describe 'Sinatra App',type: :feature do
 
   it 'has a homepage' do
     get '/'
@@ -10,10 +10,7 @@ RSpec.describe 'Sinatra App' do
   end
   it 'logins' do
     post '/', {'user' => ENV['USERNAME'],'pass' => ENV['PASS']}
-    expect(last_response).to be_ok
+    expect(last_response.location).to eq('http://example.org/crear')
   end
-  it 'has crear' do
-    get '/crear'
-    expect(last_response).to be_ok
-  end
+
 end
