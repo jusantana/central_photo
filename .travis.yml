@@ -2,5 +2,4 @@ language: ruby
 rvm: 2.5.1
 
 env:
-  - USERNAME=TEST
-  - PASS=TESTPASS
+  - USERNAME=test PASS=pass
