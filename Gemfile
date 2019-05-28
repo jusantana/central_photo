@@ -13,4 +13,5 @@ group :test do
   gem 'capybara'
   gem 'rack-test'
   gem 'rspec'
+  gem 'codecov', :require => false
 end
