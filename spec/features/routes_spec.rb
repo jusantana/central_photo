@@ -10,7 +10,6 @@ RSpec.describe 'Sinatra App' do
   end
   it 'logins' do
     post '/', {'user' => ENV['USERNAME'],'pass' => ENV['PASS']}
-    byebug
     expect(last_response).to be_ok
   end
   it 'has crear' do
