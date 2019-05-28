@@ -1,9 +1,9 @@
 
-
+require 'rspec'
 require './app.rb'
 require 'rack/test'
 
-describe 'Sinatra App' do
+RSpec.describe 'Sinatra App' do
   include Rack::Test::Methods
 
   def app
@@ -12,7 +12,6 @@ describe 'Sinatra App' do
 
   it 'has a homepage' do
     get '/'
-    byebug
     expect(last_response).to be_ok
   end
 end
