@@ -1,0 +1,14 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: Foo
+  pool: 2
+  username: user
+  password: pass
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: Footest
+  pool: 2
+  username: user
+  password: pass
