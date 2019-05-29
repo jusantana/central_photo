@@ -19,4 +19,4 @@ RSpec.configure do |config|
   end
   config.include Capybara
 end
-Capybara.app = Sinatra::Application
+Capybara.app = App
