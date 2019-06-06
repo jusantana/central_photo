@@ -11,6 +11,7 @@ gem 'sinatra-activerecord'
 gem 'rufus-scheduler'
 group :test do
   gem 'capybara'
+  gem 'launchy'
   gem 'rack-test'
   gem 'rspec'
   gem 'codecov', :require => false

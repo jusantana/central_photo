@@ -59,6 +59,8 @@ GEM
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
     json (2.2.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
@@ -124,6 +126,7 @@ DEPENDENCIES
   capybara
   codecov
   dotenv
+  launchy
   pg
   rack-test
   rake

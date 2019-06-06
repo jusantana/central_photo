@@ -159,9 +159,7 @@ end
     # AWS_SECRET_ACCESS_KEY, AWS_REGION
     # Alternative way is mentioned https://github.com/aws/aws-sdk-ruby#configuration-options
     # Create an instance of the Aws::S3::Resource class
-    s3 = Aws::S3::Resource.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-                               secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-                               region: 'us-east-2')
+    s3 = get_s3_client
 
     params[:file].each do |f|
       file_name = f[:filename]
@@ -238,8 +236,12 @@ end
 
    def get_aws_client
      Aws::S3::Client.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-                               secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-                               region: 'us-east-2')
-
+                         secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+                         region: 'us-east-2')
+   end
+   def get_s3_client
+     Aws::S3::Resource.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+                           secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+                           region: 'us-east-2')
    end
 end
