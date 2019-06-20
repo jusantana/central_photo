@@ -93,7 +93,7 @@ class App < Sinatra::Base
       unless params[:deactivate].nil?
         params[:deactivate].each do |i|
           photo = Photo.find_by(id: i.to_i)
-          photos_deactive = Photo.where(public_url: temp.public_url)
+          photos_deactive = Photo.where(public_url: photo.public_url)
           photos_deactive.each do |p|
             p.update(active: false)
           end
@@ -102,15 +102,15 @@ class App < Sinatra::Base
 
       unless params[:delete].nil?
         params[:delete].each do |i|
-          temp = Photo.find_by(id: i.to_i)
-          temp_delete = Photo.where(public_url: temp.public_url)
+          photo = Photo.find_by(id: i.to_i)
+          photos_delete = Photo.where(public_url: photo.public_url)
           ## Get aws client from env credentials
           client = get_aws_client
           ## Deletes images from aws bucket
-          temp_delete.each do |y|
-            client.delete_object( bucket: "centralphoto", key: y.photo_name.to_s)
+          photos_delete.each do |p|
+            client.delete_object( bucket: "centralphoto", key: p.photo_name.to_s)
           end
-          temp_delete.destroy_all
+          photos_delete.destroy_all
         end
     end
     else
@@ -119,20 +119,20 @@ class App < Sinatra::Base
       ## Activates images for an extra day
       unless params[:activate].nil?
         params[:activate].each do |i|
-          temp = Photo.find_by(id: i.to_i)
-          temp.update(active: true)
+          photo = Photo.find_by(id: i.to_i)
+          photo.update(active: true)
         end
     end
       unless params[:deactivate].nil?
         params[:deactivate].each do |i|
-          temp = Photo.find_by(id: i.to_i)
-          temp.update(active: false)
+          photo = Photo.find_by(id: i.to_i)
+          photo.update(active: false)
         end
     end
       unless params[:delete].nil?
         params[:delete].each do |i|
-          temp = Photo.find_by(id: i.to_i)
-          temp.delete
+          photo = Photo.find_by(id: i.to_i)
+          photo.delete
         end
     end
 end
@@ -183,7 +183,7 @@ end
         photo.todas = false
         photo.save
       else
-        for i in 1..6
+        (1..6).each do |i|
           photo = {
             photo_name: file_name,
             days: days,
@@ -201,25 +201,16 @@ end
     # Reference http://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpRuby.html
   end
 
-  error NoMethodError do
-    'Error porfavor volver a la pagina anterior y intente de nuevo'
-  end
-
   get '/display' do
     @photos = Photo.where(active: true)
     erb :display
   end
 
   get '/display/:did' do
-    photo_all = Photo.where(display: params[:did])
-    @photos = photo_all.active
+    @photos = Photo.where(display: params[:did], active: true)
     erb :display
   end
-  #   get '/deleteall' do
-  #     Photo.delete_all
-  #     2 + 2
-  #     redirect '/'
-  #   end
+
   get '/logout' do
     session.clear
     redirect '/'
