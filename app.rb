@@ -17,12 +17,7 @@ class App < Sinatra::Base
 ## and deactivates image if days reaches 0
   scheduler = Rufus::Scheduler.new
   scheduler.every '1d' do
-    photos = Photo.active
-    photos.each do |i|
-      d = i.days - 1
-      i.update(days: d)
-      i.update(active: false) if i.days <= 0
-    end
+    Photo.subtract_day!
   end
 
   helpers do
@@ -60,9 +55,7 @@ class App < Sinatra::Base
       "contrasena incorecta porfavor intente denuevo <a href='/'>Inicio</a>"
     end
   end
-  get '/index' do
-    erb :index
-  end
+
     ## This page shows displays and pictures
     ## assigned to screen
     ## accepts param display to show specific screen
