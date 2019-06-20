@@ -55,9 +55,7 @@ class App < Sinatra::Base
       "contrasena incorecta porfavor intente denuevo <a href='/'>Inicio</a>"
     end
   end
-  get '/index' do
-    erb :index
-  end
+
     ## This page shows displays and pictures
     ## assigned to screen
     ## accepts param display to show specific screen
