@@ -2,4 +2,3 @@ test:
   adapter: postgresql
   encoding: unicode
   database: centralphototest
-  
