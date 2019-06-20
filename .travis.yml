@@ -3,3 +3,6 @@ rvm: 2.5.1
 
 env:
   - USERNAME=test PASS=pass CODECOV_TOKEN="f4bce1a6-eddb-4a57-9af1-102338390b5b"
+before_script:
+  - RAKE_ENV=test rake db:create
+  - RAKE_ENV=test rake db:migrate
