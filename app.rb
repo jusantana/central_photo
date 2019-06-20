@@ -82,20 +82,20 @@ class App < Sinatra::Base
     if params[:display].to_i == 7
       unless params[:activate].nil?
         params[:activate].each do |i|
-          temp = Photo.find_by(id: i.to_i)
-          temp_active = Photo.where(public_url: temp.public_url)
-          temp_active.each do |y|
-            y.update(active: true)
+          photo = Photo.find_by(id: i.to_i)
+          photos_active = Photo.where(public_url: photo.public_url)
+          photos_active.each do |p|
+            p.update(active: true)
           end
         end
     end
     ## Deactivates images that still have days left
       unless params[:deactivate].nil?
         params[:deactivate].each do |i|
-          temp = Photo.find_by(id: i.to_i)
-          temp_deactive = Photo.where(public_url: temp.public_url)
-          temp_deactive.each do |y|
-            y.update(active: false)
+          photo = Photo.find_by(id: i.to_i)
+          photos_deactive = Photo.where(public_url: temp.public_url)
+          photos_deactive.each do |p|
+            p.update(active: false)
           end
         end
       end
