@@ -7,7 +7,7 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new :specs do |task|
   if ENV['TRAVIS']
     Rake::Task["db:create"].invoke
-    Rake::Task["db:schema:load"].invoke
+    Rake::Task["db:migrate"].invoke
   else
     Rake::Task["db:environment"].invoke
   end
