@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/jjs/workspace/photo/app.rb": [
+      "/home/jjs/workspace/central_photo/app.rb": [
         1,
         1,
         1,
@@ -30,6 +30,7 @@
         null,
         null,
         20,
+        null,
         null,
         null,
         1,
@@ -180,16 +181,15 @@
         null,
         null,
         null,
-        null,
         null
       ],
-      "/home/jjs/workspace/photo/models/display.rb": [
+      "/home/jjs/workspace/central_photo/models/display.rb": [
         null,
         1,
         1,
         null
       ],
-      "/home/jjs/workspace/photo/models/photo.rb": [
+      "/home/jjs/workspace/central_photo/models/photo.rb": [
         1,
         1,
         null,
@@ -215,7 +215,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/config/environments.rb": [
+      "/home/jjs/workspace/central_photo/config/environments.rb": [
         null,
         null,
         null,
@@ -234,7 +234,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/spec/factories/display.rb": [
+      "/home/jjs/workspace/central_photo/spec/factories/display.rb": [
         null,
         1,
         1,
@@ -243,7 +243,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/spec/factories/photo.rb": [
+      "/home/jjs/workspace/central_photo/spec/factories/photo.rb": [
         1,
         1,
         6,
@@ -251,7 +251,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/spec/features/login_spec.rb": [
+      "/home/jjs/workspace/central_photo/spec/features/login_spec.rb": [
         1,
         1,
         null,
@@ -283,7 +283,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/spec/helpers.rb": [
+      "/home/jjs/workspace/central_photo/spec/helpers.rb": [
         1,
         1,
         6,
@@ -299,7 +299,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/spec/features/routes_spec.rb": [
+      "/home/jjs/workspace/central_photo/spec/features/routes_spec.rb": [
         null,
         1,
         null,
@@ -334,7 +334,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/spec/features/upload_spec.rb": [
+      "/home/jjs/workspace/central_photo/spec/features/upload_spec.rb": [
         1,
         1,
         null,
@@ -387,7 +387,7 @@
         null,
         null
       ],
-      "/home/jjs/workspace/photo/spec/model/photo_spec.rb": [
+      "/home/jjs/workspace/central_photo/spec/model/photo_spec.rb": [
         1,
         null,
         null,
@@ -428,6 +428,6 @@
         null
       ]
     },
-    "timestamp": 1561149442
+    "timestamp": 1561155944
   }
 }

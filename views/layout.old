@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <title>Central Photo</title>
@@ -34,11 +35,11 @@
         <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()">
           <i class="fa fa-bars"></i>
         </a>
-        <a href="/index" class="w3-bar-item w3-button w3-theme-l1">Central</a>
+        <a href="/" class="w3-bar-item w3-button w3-theme-l1">Central</a>
         <a href="/crear" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Agregar</a>
         <a href="/envivo" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Editar</a>
         <a href="/display" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Ver</a>
-        <a href="/logout" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Cerrar</a>
+
       </div>
     </div>
 
@@ -53,7 +54,6 @@
       <a class="w3-bar-item w3-button w3-hover-black" href="/crear">Agregar</a>
       <a class="w3-bar-item w3-button w3-hover-black" href="/envivo">Editar</a>
       <a class="w3-bar-item w3-button w3-hover-black" href="/display">Ver</a>
-      <a class="w3-bar-item w3-button w3-hover-black" href="/logout">Cerrar</a>
 
     </nav>
 
@@ -61,32 +61,10 @@
     <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
     <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-    <div class="w3-main w3-row-padding" style="margin-left:250px"></br>
-  </br>
-</br>
-</br>
-<div ="w3-center">
-<div class="w3-card w3-third w3-container">
-  <p class='w3-center'>
-    Iniciar Session
-  </p>
-  <form method='post'>
-    <p>Usuario</p>
-    <input type="text" name='user'>
-    <p>Contrasena</p>
-    <input type='password' name='pass'>
-  </br>
-  <input type='submit' value="Entrar">
-</form>
-
-</div>
-</div>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br></br> </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br><footer id="myFooter"><div class="w3-container w3-theme-l2 w3-padding-32"><h4>Footer</h4></div><div class="w3-container w3-theme-l1"><p>Powered by<a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p></div></footer><!-- END MAIN --></div><script>
+    <div class="w3-main w3-row-padding" style="margin-left:250px">
+      <%= yield %>
+      </div>
+<footer id="myFooter" class='w3-bottom'><div class="w3-container w3-theme-l2 w3-padding-8"><h4>Central Photo</h4></div><div class="w3-container w3-theme-l1"><p></p></div></footer><!-- END MAIN --></div><script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
 // Get the DIV with overlay effect
