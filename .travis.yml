@@ -1,7 +1,6 @@
 language: ruby
 rvm: 2.5.1
-
 env:
-  - USERNAME=test PASS=pass CODECOV_TOKEN="f4bce1a6-eddb-4a57-9af1-102338390b5b"
+  secure: CaQST/WbswcHyWWyythAAVYphUuWol/EtZLnHV/O/Sg9IGk1mNrYf1rAQuXfuD4OaF8ZdGitoLRoQrYbj0GU87sf3GSPDPTlLXAKtw9h//ddsqRnuob40lE4d7PDTfc7l68cEFh7tbeBMZnV5p8Pr8Tz1lujMoBWW6yp1Ax0C+i12R+SjDqk40N8BqFt7E8kLucOLM5EmsRBxvd6idxvgwnfXImltCnnoy5OEmRdO+4rahledbkQMq5b5aiXZ+Y7JXZ9DuWP4SSdhba9hs7vWwqdUV1JTiJLwn7EL2M2h3+M46Rc04MVFFVd/q8uEZf28fzNHF5QPSP5hF5oSTH7toKepDpNT7m/F6TBt7tDQu1EXJrPMupxs64808c0Az4i06mAMScUSafyw8d+BkE9tqxtCTdWya2sPUrUXQDzzIBvHZYjKUWrE2ngEIIrqP0EBqwMmwtyjhXGdXFzW13gRYg3pBmItaYyMq65Rpnm6dCeSc1QIF15gks4YWnngUfK+/zcVMQxq0fo2ZkSs6i82Wr+TNVpBQ+kCGyOQrqELCLglGzLhsfCXZze92JlSR1WZyrmUE/dOX7zjQQ0VddDF1+i+rTFu3Ksh6LBVhf10Ry8CSy827e7KZC9+1IegeWQr+HAC+qJXGYpKebWluWxZfEpD5KNfKcV5T1n+HD7E0M=
 before_script:
-  - cp config/database.travis.yml config/database.yml
+- cp config/database.travis.yml config/database.yml
