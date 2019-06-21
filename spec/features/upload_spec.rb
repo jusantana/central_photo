@@ -18,7 +18,7 @@ RSpec.describe 'Upload',type: :feature do
     page.click_button 'entrar'
     expect(page).to have_css '.photo'
   end
-  
+
   it 'logins' do
     post '/', {'user' => ENV['USERNAME'],'pass' => ENV['PASS']}
     expect(last_response.location).to eq('http://example.org/crear')
