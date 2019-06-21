@@ -80,10 +80,9 @@ class App < Sinatra::Base
     ## Updates screen images.
     loged
     photo_ids = params[:photo_ids]
-
       photo_ids.each do |key|
         photo = Photo.find key.to_i
-        action = params[key].nil? ? false : params[key][:action]
+        action = params[key].nil? ? false : params[key][:action].scan(/\w+/).first
         case action
         when false
           next
@@ -96,6 +95,8 @@ class App < Sinatra::Base
           client = get_aws_client
           client.delete_object( bucket: "centralphoto", key: photo.photo_name.to_s)
           photo.destroy
+        when 'Elegir'
+          next
         else
           raise ArgumentError.new("param #{action} is not recognized")
         end

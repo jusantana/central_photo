@@ -19,6 +19,26 @@ RSpec.describe 'Upload',type: :feature do
     expect(page).to have_css '.photo'
   end
 
+  it 'activates photos' do
+    log_in
+    photo = FactoryBot.create(:photo, display_id: 1, active: false)
+    visit '/envivo'
+    select 'Activar', from: "[#{photo.id}][action]"
+    click_button 'actualizar'
+    photo.reload
+    expect(photo.active).to eq true
+  end
+
+  it 'deactivates photos' do
+    log_in
+    photo = FactoryBot.create(:photo, display_id: 1, active: true)
+    visit '/envivo'
+    select 'Desactivar', from: "[#{photo.id}][action]"
+    click_button 'actualizar'
+    photo.reload
+    expect(photo.active).to eq false
+  end
+
   it 'deletes photos' do
     log_in
     visit '/envivo'
