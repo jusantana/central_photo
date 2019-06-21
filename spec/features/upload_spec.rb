@@ -19,9 +19,13 @@ RSpec.describe 'Upload',type: :feature do
     expect(page).to have_css '.photo'
   end
 
-  it 'logins' do
-    post '/', {'user' => ENV['USERNAME'],'pass' => ENV['PASS']}
-    expect(last_response.location).to eq('http://example.org/crear')
+  it 'deletes photos' do
+    log_in
+    visit '/envivo'
+    photo = Photo.find_by display_id: 1
+    select 'Borrar', from: "[#{photo.id}][action]"
+    click_button 'actualizar'
+    expect{photo.reload}.to raise_error ActiveRecord::RecordNotFound
   end
 
 end
