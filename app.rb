@@ -6,6 +6,7 @@ require 'thin'
 require 'byebug'
 require 'rufus-scheduler'
 # require 'config.ru'
+require './models/display.rb'
 require './models/photo.rb'
 require './config/environments'
 
@@ -61,14 +62,14 @@ class App < Sinatra::Base
     ## accepts param display to show specific screen
   get '/envivo' do
     loged
-    @display = params[:display].to_i unless params[:display].nil?
+    display = Display.find(params[:display].to_i) unless params[:display].nil?
     ##defaults to screen 1
     @photos = if @display.nil?
-                Photo.where(display: 1)
+                Display.first.photos
               elsif @display == 7
-                Photo.where(todas: true, display: 4)
+                Photo.where(display_all: true)
               else
-                Photo.where(display: @display)
+                display.photos
             end
     erb :envivo
   end
@@ -80,22 +81,22 @@ class App < Sinatra::Base
     ## does action on all screens for
     ## specific image
     if params[:display].to_i == 7
-      unless params[:activate].nil?
+      if !params[:activate].nil?
         params[:activate].each do |i|
           photo = Photo.find_by(id: i.to_i)
           photos_active = Photo.where(public_url: photo.public_url)
           photos_active.each do |p|
-            p.update(active: true)
+            p.activate!
           end
         end
-    end
+      end
     ## Deactivates images that still have days left
-      unless params[:deactivate].nil?
+      if !params[:deactivate].nil?
         params[:deactivate].each do |i|
           photo = Photo.find_by(id: i.to_i)
           photos_deactive = Photo.where(public_url: photo.public_url)
           photos_deactive.each do |p|
-            p.update(active: false)
+            p.deactivate!
           end
         end
       end
