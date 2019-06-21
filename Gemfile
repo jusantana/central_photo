@@ -9,12 +9,12 @@ gem 'rake'
 gem 'byebug'
 gem 'sinatra-activerecord'
 gem 'rufus-scheduler'
+gem 'rspec'
 group :test do
   gem 'database_cleaner'
   gem 'factory_bot'
   gem 'capybara'
   gem 'launchy'
   gem 'rack-test'
-  gem 'rspec'
   gem 'codecov', :require => false
 end
