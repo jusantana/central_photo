@@ -13,4 +13,9 @@ RSpec.describe 'Sinatra App',type: :feature do
     expect(last_response.location).to eq('http://example.org/crear')
   end
 
+  it 'redirects home if not loged in' do
+    get '/envivo'
+    expect(last_response.location).to eq('http://example.org/')
+  end
+
 end
