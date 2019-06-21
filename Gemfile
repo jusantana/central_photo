@@ -1,20 +1,21 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
-gem 'sinatra', ">= 2.0.2"
 gem 'aws-sdk-s3'
-gem 'thin'
+gem 'byebug'
 gem 'dotenv'
 gem 'pg'
 gem 'rake'
-gem 'byebug'
-gem 'sinatra-activerecord'
-gem 'rufus-scheduler'
 gem 'rspec'
+gem 'rufus-scheduler'
+gem 'shotgun'
+gem 'sinatra', '>= 2.0.2'
+gem 'sinatra-activerecord'
+gem 'thin'
 group :test do
+  gem 'capybara'
+  gem 'codecov', require: false
   gem 'database_cleaner'
   gem 'factory_bot'
-  gem 'capybara'
   gem 'launchy'
   gem 'rack-test'
-  gem 'codecov', :require => false
 end
