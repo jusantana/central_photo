@@ -10,10 +10,12 @@ Webpage refreshes every 20 minutes.
 - Images are saved to a aws s3 bucket
 - Edit and rename .env.example to .env
 - Edit and rename database.yml.example to database.yml
-- Make sure db exists
+- rake db:setup #creates db
+- rake db:seed #seeds database with 6 displays
 - Bundle install
-- ruby app.rb or rackup to start app
+- rackup to start app
 - bundle exec rake to run tests
+- # Test db doesnt need seeding a factory handles display creation
 
 # Screen Deployment
   - Set up raspbery pi's to open browser in KIOSK mode
