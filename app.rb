@@ -166,7 +166,7 @@ end
         display = params[:display].to_i
       else
         upload_all = true
-   end
+      end
       # Reference the target object by bucket name and key.
       # Objects live in a bucket and have unique keys that identify the object.
       obj = s3.bucket('centralphoto').object(file_name)
