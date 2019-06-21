@@ -6,6 +6,7 @@ require 'thin'
 require 'byebug'
 require 'rufus-scheduler'
 # require 'config.ru'
+require './models/display.rb'
 require './models/photo.rb'
 require './config/environments'
 
@@ -61,83 +62,47 @@ class App < Sinatra::Base
     ## accepts param display to show specific screen
   get '/envivo' do
     loged
-    @display = params[:display].to_i unless params[:display].nil?
-    ##defaults to screen 1
+    @display = params[:display] unless params[:display].nil?
+    ## defaults to screen 1
     @photos = if @display.nil?
-                Photo.where(display: 1)
-              elsif @display == 7
-                Photo.where(todas: true, display: 4)
+                Display.first.photos
+              elsif @display == 'todas'
+                Photo.where(display_all: true)
               else
-                Photo.where(display: @display)
+                display = Display.find_by(display_id: @display)
+                display.photos
             end
+
     erb :envivo
   end
 
   post '/envivo' do
     ## Updates screen images.
     loged
-    ## if params[:display] is 7 then it
-    ## does action on all screens for
-    ## specific image
-    if params[:display].to_i == 7
-      unless params[:activate].nil?
-        params[:activate].each do |i|
-          photo = Photo.find_by(id: i.to_i)
-          photos_active = Photo.where(public_url: photo.public_url)
-          photos_active.each do |p|
-            p.update(active: true)
-          end
-        end
-    end
-    ## Deactivates images that still have days left
-      unless params[:deactivate].nil?
-        params[:deactivate].each do |i|
-          photo = Photo.find_by(id: i.to_i)
-          photos_deactive = Photo.where(public_url: photo.public_url)
-          photos_deactive.each do |p|
-            p.update(active: false)
-          end
-        end
-      end
-
-      unless params[:delete].nil?
-        params[:delete].each do |i|
-          photo = Photo.find_by(id: i.to_i)
-          photos_delete = Photo.where(public_url: photo.public_url)
-          ## Get aws client from env credentials
+    photo_ids = params[:photo_ids]
+      photo_ids.each do |key|
+        photo = Photo.find key.to_i
+        action = params[key].nil? ? false : params[key][:action].scan(/\w+/).first
+        case action
+        when false
+          next
+        when 'activate'
+          photo.activate!
+        when 'deactivate'
+          photo.deactivate!
+        when 'delete'
+         ## Deletes images from aws bucket
           client = get_aws_client
-          ## Deletes images from aws bucket
-          photos_delete.each do |p|
-            client.delete_object( bucket: "centralphoto", key: p.photo_name.to_s)
-          end
-          photos_delete.destroy_all
+          client.delete_object( bucket: "centralphoto", key: photo.photo_name.to_s)
+          photo.destroy
+        when 'Elegir'
+          next
+        else
+          raise ArgumentError.new("param #{action} is not recognized")
         end
-    end
-    else
-      ## does action on image
-      ## for specific screen
-      ## Activates images for an extra day
-      unless params[:activate].nil?
-        params[:activate].each do |i|
-          photo = Photo.find_by(id: i.to_i)
-          photo.update(active: true)
-        end
-    end
-      unless params[:deactivate].nil?
-        params[:deactivate].each do |i|
-          photo = Photo.find_by(id: i.to_i)
-          photo.update(active: false)
-        end
-    end
-      unless params[:delete].nil?
-        params[:delete].each do |i|
-          photo = Photo.find_by(id: i.to_i)
-          photo.delete
-        end
-    end
-end
+     end
 ## once done redirect to edit page
-    redirect '/envivo'
+    redirect back
   end
 ## page to add images
   get '/crear' do
@@ -147,57 +112,39 @@ end
 
   post '/crear' do
     loged
-    # assumption
-    # Following Environment variables are already set
-    # AWS_SECRET_ACCESS_KEY, AWS_REGION
-    # Alternative way is mentioned https://github.com/aws/aws-sdk-ruby#configuration-options
+
+      upload_all = nil
+      if params[:todas].nil?
+        display = Display.find_by(display_id: params[:display].to_i)
+      else
+        upload_all = true
+      end
+      days = params[:days].to_i
     # Create an instance of the Aws::S3::Resource class
     s3 = get_s3_client
 
     params[:file].each do |f|
       file_name = f[:filename]
-      upload_all = nil
+
       upload_file = f[:tempfile]
-      days = params[:days].to_i
-      ## if todas is true then upload images
-      ## to all screens
-      ## else set display to specific screen
-      if params[:todas].nil?
-        display = params[:display].to_i
-      else
-        upload_all = true
-   end
       # Reference the target object by bucket name and key.
       # Objects live in a bucket and have unique keys that identify the object.
       obj = s3.bucket('centralphoto').object(file_name)
       obj.upload_file(upload_file, acl: 'public-read') # http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-      if upload_all.nil?
-        # Returns Public URL to the file
-        photo = {
+        photo = Photo.new(
           photo_name: file_name,
           days: days,
-          public_url: obj.public_url,
-          display: display
-        }
-        photo = Photo.new(photo)
-        photo.todas = false
-        photo.save
+          public_url: obj.public_url
+        )
+      if upload_all.nil?
+        photo.display = display
       else
-        (1..6).each do |i|
-          photo = {
-            photo_name: file_name,
-            days: days,
-            public_url: obj.public_url,
-            display: i
-          }
-          photo = Photo.new(photo)
-          photo.todas = true
-          photo.save
-        end
-    end
+        photo.display_all = true
+      end
+        photo.save
     end
 
-    "Subida las fotos!! <a href='/crear'>Volver</a>"
+    redirect '/envivo'
     # Reference http://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpRuby.html
   end
 
@@ -207,7 +154,7 @@ end
   end
 
   get '/display/:did' do
-    @photos = Photo.where(display: params[:did], active: true)
+    @photos = Display.find_by(display_id: params[:did]).photos.active + Photo.where(display_all: true)
     erb :display
   end
 
@@ -223,9 +170,11 @@ end
                          secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
                          region: 'us-east-2')
    end
+
    def get_s3_client
      Aws::S3::Resource.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'],
                            secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
                            region: 'us-east-2')
    end
+
 end

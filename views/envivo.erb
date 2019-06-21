@@ -81,89 +81,76 @@
       <option value="4">4</option>
       <option value="5">5</option>
       <option value="6">6</option>
-      <option value="7">
-        Todas
-      </option>
+      <option value="todas">Todas</option>
     </select>
   </form>
 
-</form>
+  <% if @display == 7%>
+    <%= "<h1>Photos que estan en todas" %>
+  <% else %>
+    <%= "<h1> Pantalla " %>
+    <%= @display %>
+  <% end %>
 
-<% if @display == 7%>
-  <%= "<h1>Photos que estan en todas" %>
-<% else %>
-  <%= "<h1> Pantalla " %>
-  <%= @display %>
-<% end %>
+  <%='</h1>' %>
+  <form method="post">
+    <table class="w3-table-all" id="envivo_table">
+      <thead>
+        <tr>
+          <th>Nombre de foto</th>
+          <th>Activa</th>
+          <th>Dias Restantes</th>
+          <th>photo</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @photos.each do |p| %>
+          <tr>
+            <td><%= p.photo_name %></td>
+            <td>
+              <%  if p.active %>
+                <%= 'Si' %>
+              <%else%>
+                <%= 'No' %>
+              <%end%>
+            </td>
+            <td><%= p.days %></td>
+            <td><%= "<img src='#{p.public_url}' class='photo' height='100' width='120'>" %></td>
+            <td>
+              <input type='number' class='w3-hide' name='photo_ids[]' value=<%= p.id %>>
+              <select name="[<%= p.id %>][action]">
+                <option disabled="disabled" selected="selected" hidden="hidden">
+                  Elegir
+                </option>
+                <option value="activate">Activar</option>
+                <option value="deactivate">Desactivar</option>
+                <option value="delete">Borrar</option>
+              </select>
+              <% end unless @photos.nil? %>
 
-<%='</h1>' %>
-<form method="post">
-  <table class="w3-table-all" id="envivo_table">
-    <thead>
-      <tr>
-        <th>Nombre de foto</th>
-        <th>Activa</th>
-        <th>Dias Restantes</th>
-        <th>photo</th>
-        <th>activar</th>
-        <th>desactivar</th>
-        <th>Borrar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @photos.each do |i| %>
-        <%= '<tr>' %>
-        <%= '<td>'%>
-        <%= i.photo_name %>
-        <%= '</td>' %>
-        <%= '<td>'%>
-        <%  if i.active %>
-          <%= 'Si' %>
-        <%else%>
-          <%= 'No' %>
-        <%end%>
-        <%= '</td>' %>
-        <%= '<td>'%>
-        <%= i.days %>
-        <%= '</td>' %>
-        <%= '<td>'%>
-        <%= "<img src='#{i.public_url}' height='100' width='120'>" %>
-        <%= '</td>' %>
-        <%= '</td>' %>
-        <%= '<td>'%>
-        <%= "<input type='checkbox' value='#{i.id}' name='activate[]'>" %>
-        <%= '</td>' %>
-        <%= '<td>'%>
-        <%= "<input type='checkbox' value='#{i.id}' name = 'deactivate[]'>" %>
-        <%= '</td>' %>
-        <%= '<td>'%>
-        <%= "<input type='checkbox' value='#{i.id}' name='delete[]'>" %>
-        <%= '</td>' %>
-        <%= '</tr>' %>
-      <% end %>
+              </tbody>
+            </table>
+          </br>
+        </br>
+        <div class='w3-center'>
+          <%= "<input type='text' name='display' value='#{@display}' hidden='hidden'></input>"%>
 
-    </tbody>
-  </table>
-</br>
-</br>
-<div class='w3-center'>
-<%= "<input type='text' name='display' value='#{@display}' hidden='hidden'></input>"%>
+          <input type='submit' value="actualizar">
+        </div>
 
-<input type='submit' value="actualizar">
-</div>
-
-</form>
-</br>
-</br>
+      </form>
+    </br>
+  </br>
 </div>
 </div>
 <footer id="myFooter">
 <div class="w3-container w3-theme-l2 w3-padding-32">
-<h4>Footer</h4>
+  <h4>Footer</h4>
 </div>
 <div class="w3-container w3-theme-l1">
-<p>Powered by<a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
-</p>
+  <p>Powered by<a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+  </p>
 </div>
 </footer>
 <!-- END MAIN -->
@@ -176,11 +163,11 @@ var overlayBg = document.getElementById("myOverlay");
 // Toggle between showing and hiding the sidebar, and add overlay effect
 function w3_open() {
 if (mySidebar.style.display === 'block') {
-mySidebar.style.display = 'none';
-overlayBg.style.display = "none";
+  mySidebar.style.display = 'none';
+  overlayBg.style.display = "none";
 } else {
-mySidebar.style.display = 'block';
-overlayBg.style.display = "block";
+  mySidebar.style.display = 'block';
+  overlayBg.style.display = "block";
 }
 }
 // Close the sidebar with the close button
@@ -196,4 +183,6 @@ $(document).ready(function () {
 $('#envivo_table').DataTable()
 })
 </script>
-</body></html><html></html>
+</body>
+</html>
+<html></html>

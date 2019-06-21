@@ -1,8 +1,9 @@
 class Photo < ActiveRecord::Base
+  belongs_to :display
+
   def self.active
     where(active: true)
   end
-
 
   def self.subtract_day!
     active.each do |p|
@@ -13,9 +14,11 @@ class Photo < ActiveRecord::Base
   end
 
   def deactivate!
-    raise ArgumentError.new "Photo still has #{days} days remaining" if days > 0
     update(active: false)
   end
 
+  def activate!
+    update(active: true)
+  end
 
 end

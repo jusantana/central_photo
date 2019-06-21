@@ -22,4 +22,17 @@ RSpec.describe Photo,type: :model do
     expect(photo.active).to eq false
   end
 
+  it 'photos deactivate' do
+    photo = FactoryBot.create :photo
+    photo.deactivate!
+    photo.reload
+    expect(photo.active).to eq false
+  end
+
+  it 'photos activate' do
+    photo = FactoryBot.create :photo, active: false
+    photo.activate!
+    photo.reload
+    expect(photo.active).to eq true
+  end
 end
