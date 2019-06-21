@@ -8,6 +8,7 @@ RSpec.describe 'Sinatra App',type: :feature do
     get '/'
     expect(last_response).to be_ok
   end
+  
   it 'logins' do
     post '/', {'user' => ENV['USERNAME'],'pass' => ENV['PASS']}
     expect(last_response.location).to eq('http://example.org/crear')
