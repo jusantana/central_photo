@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
   belongs_to :display
-  
+
   def self.active
     where(active: true)
   end
