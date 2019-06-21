@@ -25,7 +25,7 @@ class App < Sinatra::Base
     def loged
       ## When attempted to go to any page
       ## while not logged in redirects to home
-      #redirect '/' if session[:id].nil?
+      redirect '/' if session[:id].nil?
     end
       ## Requires https
     def https_required!
