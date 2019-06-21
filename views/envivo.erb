@@ -116,7 +116,7 @@
               <%end%>
             </td>
             <td><%= p.days %></td>
-            <td><%= "<img src='#{p.public_url}' height='100' width='120'>" %></td>
+            <td><%= "<img src='#{p.public_url}' class='photo' height='100' width='120'>" %></td>
             <td>
               <input type='number' class='w3-hide' name='photo_ids[]' value=<%= p.id %>>
               <select name="[<%= p.id %>][action]">
