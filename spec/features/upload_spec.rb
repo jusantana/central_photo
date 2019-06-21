@@ -26,6 +26,7 @@ RSpec.describe 'Upload',type: :feature do
     select 'Activar', from: "[#{photo.id}][action]"
     click_button 'actualizar'
     photo.reload
+    
     expect(photo.active).to eq true
   end
 
