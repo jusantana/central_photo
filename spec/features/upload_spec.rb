@@ -5,9 +5,7 @@ RSpec.configure do |c|
   c.include Helpers
 end
 
-RSpec.describe 'Upload',type: :feature do
-
-
+RSpec.describe 'Upload', type: :feature do
   it 'Create a valid Photo object to specific screen' do
     create_displays
     log_in
@@ -45,7 +43,6 @@ RSpec.describe 'Upload',type: :feature do
     photo = Photo.find_by display_id: 1
     select 'Borrar', from: "[#{photo.id}][action]"
     click_button 'actualizar'
-    expect{photo.reload}.to raise_error ActiveRecord::RecordNotFound
+    expect { photo.reload }.to raise_error ActiveRecord::RecordNotFound
   end
-
 end
