@@ -7,7 +7,7 @@ RSpec.describe Display, type: :model do
   end
 
   it 'sets last call' do
-    display = FactoryBot.create(:display, display_id: 5)
+    display = FactoryBot.create(:display, display_id: 10)
     display.update_status
     display.reload
     expect(display.last_call).to be > Time.now - 5 # Subtracts five seconds from time now

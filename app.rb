@@ -156,7 +156,7 @@ class App < Sinatra::Base
 
   get '/display/:did' do
     display = Display.find_by(display_id: params[:did])
-    display.update_status
+    display.try(:update_status)
     @photos = display.photos.active + Photo.where(display_all: true)
     erb :display, layout: false
   end
