@@ -15,7 +15,7 @@ Webpage refreshes every 20 minutes.
 - Bundle install
 - rackup to start app
 - bundle exec rake to run tests
-- # Test db doesnt need seeding a factory handles display creation
+- Test db doesnt need seeding a factory handles display creation
 
 # Screen Deployment
   - Set up raspbery pi's to open browser in KIOSK mode
