@@ -155,8 +155,15 @@ class App < Sinatra::Base
   end
 
   get '/display/:did' do
-    @photos = Display.find_by(display_id: params[:did]).photos.active + Photo.where(display_all: true)
+    display = Display.find_by(display_id: params[:did])
+    display.update_status
+    @photos = display.photos.active + Photo.where(display_all: true)
     erb :display, layout: false
+  end
+
+  get '/status' do
+    @display = Display.all
+    erb :status
   end
 
   get '/logout' do
