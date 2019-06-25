@@ -8,7 +8,7 @@ RSpec.describe 'Display', type: :feature do
 
   it 'display with id has no layout' do
     # skip
-    display = FactoryBot.create(:display, display_id: 1, id: 100)
+    FactoryBot.create(:display, display_id: 1, id: 100)
     visit '/display/1'
     expect(page).to_not have_content 'Central'
   end
