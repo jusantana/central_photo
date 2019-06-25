@@ -51,32 +51,100 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 
   <div class="w3-row w3-padding-64">
 
-    <div class="w3-card w3-third w3-container w3-display-middle">
-<h1 class='agregar'>Agregar Photos</h1>
-<form method="post" enctype="multipart/form-data">
+    
+<div class='w3-margin-left'>
+  
+    <h1> Pantalla </h1>
+    
+  
 
-  <p>Selecionar foto</p>
-  <input type="file" id='files' name="file[]" multiple="multiple" required="required">
-  <br>
-    <p>
-      Cuantos Dias
-    </p>
-
-    <input type='number' name='days' id='days' required="required">
-    <p>Numero de pantalla</p>
-    <select name='display' id='display'>
+  <form method='get'>
+    <select name='display' onchange='submit()'>
+      <option disabled="disabled" selected="selected" hidden="hidden">
+        Elegir
+      </option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
       <option value="6">6</option>
+      <option value="todas">Todas</option>
     </select>
-    <span>Todas</span>
-    <input type="checkbox" name='todas'>
-    <br>
-    <br>
-    <input type="submit" value="entrar">
+  </form>
+  <form method="post">
+    <table class="w3-table-all" id="envivo_table">
+      <thead>
+        <tr>
+          <th>Nombre de foto</th>
+          <th>Activa</th>
+          <th>Dias Restantes</th>
+          <th>photo</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td></td>
+            <td>
+              
+                Si
+              
+            </td>
+            <td>5</td>
+            <td><img src='' class='photo' height='100' width='120'></td>
+            <td>
+              <input type='number' class='w3-hide' name='photo_ids[]' value=2>
+              <select name="[2][action]">
+                <option disabled="disabled" selected="selected" hidden="hidden">
+                  Elegir
+                </option>
+                <option value="activate">Activar</option>
+                <option value="deactivate">Desactivar</option>
+                <option value="delete">Borrar</option>
+              </select>
+              
+          <tr>
+            <td></td>
+            <td>
+              
+                Si
+              
+            </td>
+            <td>5</td>
+            <td><img src='' class='photo' height='100' width='120'></td>
+            <td>
+              <input type='number' class='w3-hide' name='photo_ids[]' value=3>
+              <select name="[3][action]">
+                <option disabled="disabled" selected="selected" hidden="hidden">
+                  Elegir
+                </option>
+                <option value="activate">Activar</option>
+                <option value="deactivate">Desactivar</option>
+                <option value="delete">Borrar</option>
+              </select>
+              
+              </tbody>
+            </table>
+          </br>
+        </br>
+        <div class='w3-center'>
+          <input type='text' name='display' value='' hidden='hidden'></input>
+
+          <input type='submit' value="actualizar">
+        </div>
+
+      </form>
+<script>
+function submit() {
+this.submit();
+}
+$(document).ready(function () {
+
+$('#envivo_table').DataTable()
+})
+</script>
 
 
   </div>

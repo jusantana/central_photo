@@ -246,10 +246,10 @@
         null
       ],
       "/home/jjs/workspace/central_photo/spec/factories/display.rb": [
-        null,
         1,
         1,
         1,
+        11,
         11,
         null,
         null
@@ -388,9 +388,9 @@
         1,
         1,
         1,
+        null,
+        null,
         1,
-        null,
-        null,
         1,
         1,
         1,
@@ -469,6 +469,6 @@
         null
       ]
     },
-    "timestamp": 1561440869
+    "timestamp": 1561441589
   }
 }
