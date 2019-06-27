@@ -4,7 +4,7 @@ Sinatra app to upload pictures and display them according to get request. Images
 Webpage refreshes every 20 minutes.
 ## Example:
  Display all images for screen 3
- - www.example.com/display/3 
+ - https://centralphotostage.herokuapp.com/display/3
 
 # App Deployment
 - Images are saved to a aws s3 bucket
