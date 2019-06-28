@@ -7,7 +7,7 @@ Webpage refreshes every 20 minutes.
  - https://centralphotostage.herokuapp.com/display/3
 
 # App Deployment
-- Images are saved to a aws s3 bucket
+- Images are saved to an aws s3 bucket
 - Edit and rename .env.example to .env
 - Edit and rename database.yml.example to database.yml
 - rake db:setup #creates db
