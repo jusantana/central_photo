@@ -66,7 +66,7 @@ class App < Sinatra::Base
     @display = params[:display] unless params[:display].nil?
     ## defaults to screen 1
     @photos = if @display.nil?
-                Display.first.photos
+                Display.find_by(display_id: 1).photos
               elsif @display == 'todas'
                 Photo.where(display_all: true)
               else
