@@ -66,7 +66,7 @@ class App < Sinatra::Base
     @display = params[:display] unless params[:display].nil?
     ## defaults to screen 1
     @photos = if @display.nil?
-                Display.first.photos
+                Display.find_by(display_id: 1).photos
               elsif @display == 'todas'
                 Photo.where(display_all: true)
               else
@@ -157,7 +157,7 @@ class App < Sinatra::Base
   get '/display/:did' do
     display = Display.find_by(display_id: params[:did])
     display.try(:update_status)
-    @photos = display.photos.active + Photo.where(display_all: true)
+    @photos = display.photos.active + Photo.where(display_all: true,active: true)
     erb :display, layout: false
   end
 
