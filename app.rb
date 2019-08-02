@@ -162,7 +162,7 @@ class App < Sinatra::Base
   end
 
   get '/status' do
-    @display = Display.all
+    @display = Display.all.sort
     erb :status
   end
 

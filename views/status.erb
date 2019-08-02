@@ -1,18 +1,31 @@
-
-<h1> Status de Pantalla </h1>
+<h1>
+  Status de Pantalla
+</h1>
 
 <table class='w3-table-all w3-centered'>
 
-<thead>
-  <th> Numero </th>
-  <th> # Photos </th>
-  <th> Ulitma Llamada </th>
-</thead>
-<% @display.each do |d| %>
-  <tr>
-    <td> <%= d.display_id %> </td>
-    <td> <%= d.photos.size %> </td>
-    <td> <%= d.last_call ? d.last_call.in_time_zone("America/New_York").strftime("%b %-d %k:%M %P") : "Inactiva" %> </td>
-  </tr>
+  <thead>
+    <th>
+      Numero
+    </th>
+    <th>
+      # Photos
+    </th>
+    <th>
+      Ulitma Llamada
+    </th>
+  </thead>
+  <% @display.each do |d| %>
+    <tr>
+      <td>
+        <%= d.display_id %>
+      </td>
+      <td>
+        <%= d.photos.size %>
+      </td>
+      <td>
+        <%= d.last_call ? d.last_call.in_time_zone("America/New_York").strftime("%b %-d %k:%M %P") : "Inactiva" %>
+      </td>
+    </tr>
   <% end %>
 </table>
