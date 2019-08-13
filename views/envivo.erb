@@ -1,9 +1,10 @@
-
 <div class='w3-margin-left'>
   <% if @display == 7%>
     <h1>Photos que estan en todas</h1>
   <% else %>
-    <h1> Pantalla </h1>
+    <h1>
+      Pantalla
+    </h1>
     <%= @display %>
   <% end %>
 
@@ -67,3 +68,8 @@
         </div>
 
       </form>
+      <script>
+        $(document).ready(function () {
+          $('#envivo_table').DataTable();
+        });
+      </script>
