@@ -1,3 +1,5 @@
+![Travis](https://travis-ci.com/jusantana/central_photo.svg?branch=master "Travis Status")
+
 # Modal app
 
 Sinatra app to upload pictures and display them according to get request. Images run in a slideshow and change every 15 seconds.
