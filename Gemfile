@@ -10,7 +10,7 @@ gem 'rufus-scheduler'
 gem 'shotgun'
 gem 'sinatra', '>= 2.0.2'
 gem 'sinatra-activerecord'
-gem 'thin'
+gem 'puma'
 group :test do
   gem 'capybara'
   gem 'codecov', require: false
